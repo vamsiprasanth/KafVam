@@ -1,4 +1,4 @@
-<img src="https://github.com/vamsiprasanth/Kafvam/blob/main/types.gif"/> # KafVam - Kafka Message Viewer Desktop UI </h1>
+<img src="https://github.com/vamsiprasanth/Kafvam/blob/main/types.gif"/> <h1> KafVam - Kafka Message Viewer Desktop UI </h1>
 
 <em>KafVam is a Desktop UI for viewing Kafka topics, messages.You can also poll messages in realtime /from beginning. It also has functionality to describe groups pertained to the topic to check lag. One exciting feature is to filter the messages in realtime based on multiple search criteria.</em>
 
