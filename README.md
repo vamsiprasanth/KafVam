@@ -1,11 +1,5 @@
-<img src="https://raw.githubusercontent.com/wiki/obsidiandynamics/kafdrop/images/kafdrop-logo.png" width="90px" alt="logo"/> KafVam - Kafka Message Viewer Desktop UI  [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?url=https%3A%2F%2Fgithub.com%2Fobsidiandynamics%2Fkafdrop&text=Get%20Kafdrop%20%E2%80%94%20a%20web-based%20UI%20for%20viewing%20%23ApacheKafka%20topics%20and%20browsing%20consumers%20)
+<img src="https://github.com/vamsiprasanth/Kafvam/blob/main/types.gif" alt="logo"/> KafVam - Kafka Message Viewer Desktop UI
 ===
-
-<em>Kafdrop is a web UI for viewing Kafka topics and browsing consumer groups.</em> The tool displays information such as brokers, topics, partitions, consumers, and lets you view messages. 
-
-
-<img src="https://github.com/vamsiprasanth/Kafvam/blob/main/types.gif"width="90px" alt="logo"/>  KafVam - Kafka Message Viewer Desktop UI 
-
 <em>KafVam is a Desktop UI for viewing Kafka topics, messages.You can also poll messages in realtime /from beginning. It also has functionality to describe groups pertained to the topic to check lag. One exciting feature is to filter the messages in realtime based on multiple search criteria.</em>
 
 This project is designed using eclipse RCP3. It's a desktop application that can support few kafka admin functionalities which cant be supported with web UI thereby easing our day to day activities without having to execute and view in the console.
