@@ -1,6 +1,6 @@
-<img src="https://github.com/vamsiprasanth/Kafvam/blob/main/types.gif" alt="logo"/> #KafVam - Kafka Message Viewer Desktop UI
+<img src="https://github.com/vamsiprasanth/Kafvam/blob/main/types.gif" alt="logo"/>#KafVam - Kafka Message Viewer Desktop UI
 
-KafVam is a Desktop UI for viewing Kafka topics, messages.You can also poll messages in realtime /from beginning. It also has functionality to describe groups pertained to the topic to check lag. One exciting feature is to filter the messages in realtime based on multiple search criteria.
+<em>KafVam is a Desktop UI for viewing Kafka topics, messages.You can also poll messages in realtime /from beginning. It also has functionality to describe groups pertained to the topic to check lag. One exciting feature is to filter the messages in realtime based on multiple search criteria.
 
 This project is designed using eclipse RCP3. It's a desktop application that can support few kafka admin functionalities which cant be supported with web UI thereby easing our day to day activities without having to execute and view in the console.
 
