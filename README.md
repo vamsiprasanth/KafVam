@@ -5,7 +5,7 @@
 This project is designed using eclipse RCP3. It's a desktop application that can support few kafka admin functionalities which is not supported with existing web UI thereby easing our day to day activities without having to execute and view in the console.
 
 
-![ScreenShot](https://github.com/vamsiprasanth/Kafvam/blob/main/KafVam.PNG)
+![ScreenShot](https://github.com/vamsiprasanth/Kafvam/blob/main/KafVam.png)
 
 
 # Features
