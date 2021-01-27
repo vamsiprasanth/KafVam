@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry exported="true" kind="lib" path="lib/slf4j-api-1.7.30.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/log4j-api-2.14.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/log4j-core-2.14.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/slf4j-log4j12-1.7.30.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
+	<classpathentry excluding="kafvam/rcp/view/TopicMessages2.java" kind="src" path="src"/>
+	<classpathentry kind="lib" path="lib/kafka-clients-2.5.0.jar" sourcepath="C:/Users/Vamsi Prasanth/.m2/repository/org/apache/kafka/kafka-clients/2.5.0/kafka-clients-2.5.0-sources.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
