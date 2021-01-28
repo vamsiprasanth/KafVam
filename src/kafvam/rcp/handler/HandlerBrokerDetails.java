@@ -1,5 +1,7 @@
 package kafvam.rcp.handler;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
@@ -13,6 +15,7 @@ import kafvam.rcp.view.BrokerDetails;
 
 public class HandlerBrokerDetails extends AbstractHandler {
 	public final static String ID = "hd.brkr.details";
+	private Logger logger = LogManager.getLogger(getClass());
 
 	private KafAdminClient kac = KafkaInit.getKafAdminClient();
 
@@ -22,11 +25,16 @@ public class HandlerBrokerDetails extends AbstractHandler {
 				.findView(BrokerDetails.ID);
 		if (bDetailsView != null) {
 			KafkaDetails kd = kac.getKafkaDetails();
-			setLabelVal(bDetailsView.getBootstrapServer(), kd.getBootstrapServer());
-			setLabelVal(bDetailsView.getTotPartition(), kd.getTotalPartitions());
-			setLabelVal(bDetailsView.getTotTopics(), kd.getTotalTopics());
-			setLabelVal(bDetailsView.getTotCgs(), kd.getNumOfCgs());
+			if (kd != null) {
+				logger.info("Populating Broker Details");
+				setLabelVal(bDetailsView.getBootstrapServer(), kd.getBootstrapServer());
+				setLabelVal(bDetailsView.getTotPartition(), kd.getTotalPartitions());
+				setLabelVal(bDetailsView.getTotTopics(), kd.getTotalTopics());
+				setLabelVal(bDetailsView.getTotCgs(), kd.getNumOfCgs());
+			}
 
+		} else {
+			logger.info("Broker Details View is null");
 		}
 		return null;
 	}

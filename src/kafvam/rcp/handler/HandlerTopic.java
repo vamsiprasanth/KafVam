@@ -31,10 +31,13 @@ public class HandlerTopic {
 	}
 
 	public void init() {
+		logger.info("Handler Topic Initialize");
 		TableViewer viewer = tpView.getViewer();
 		viewer.setContentProvider(new ArrayContentProvider());
 		viewer.setInput(kac.getAllTopics());
 		viewer.setComparator(new ViewerComparator());
+		logger.info("Handler Topic Initialize Complete");
+
 
 	}
 

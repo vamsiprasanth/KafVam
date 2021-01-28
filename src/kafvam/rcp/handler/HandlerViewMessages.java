@@ -62,7 +62,6 @@ public class HandlerViewMessages {
 
 	public void execute() {
 		sMsgTxt = "'|' as separator for multiple search strings '&&' as separator in search string.\n   Eg:Apple&&Machintosh|Apple&&Ambrosia|Orange\n   The above example matches Apple and Gala in the same Kafka message\n   or Apple and McIntosh or Orange ";
-
 		tpMsgsView.getSite().getWorkbenchWindow().getSelectionService()
 				.addSelectionListener(this.outLineSelectionChangedListener);
 

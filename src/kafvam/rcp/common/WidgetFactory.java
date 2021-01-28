@@ -53,6 +53,10 @@ public class WidgetFactory {
 		return toolkit.createLabel(composite, text);
 	}
 
+	public static Label createWrapLabel(FormToolkit toolkit, Composite composite, String text) {
+		return toolkit.createLabel(composite, text,SWT.WRAP);
+	}
+
 	public static Label createLabel(Composite composite) {
 		return new Label(composite, SWT.WRAP);
 	}
