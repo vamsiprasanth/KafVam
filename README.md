@@ -22,7 +22,10 @@ This project is designed using eclipse RCP3. It's a desktop application that can
 * Windows 7 or later
 
 # Getting Started
-You can directly copy the kafkavam.zip into your folder and configure the kafvam.properties and log4j.properties and run KafVam.exe to launch the application
+The project was developed in Eclipse Neon. Download Eclipse RCP3 development tools and import the project and you are good to go.
+
+# Running the Product directly in file system
+You can directly download the contents (zip files) in the deploy folder and follow the readme instructions to run the product/executable.
 
 # Contributing Guidelines
 All contributions are more than welcomed. Contributions may close an issue, fix a bug (reported or not reported), add new design blocks, improve the existing code, add new feature, and so on. In the interest of fostering an open and welcoming environment, we as contributors and maintainers pledge to making participation in our project and our community a harassment-free experience for everyone.
