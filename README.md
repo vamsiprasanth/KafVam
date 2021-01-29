@@ -15,6 +15,7 @@ This project is designed using eclipse RCP3. It's a desktop application that can
                   -  Poll realtime messages from latest offset or from beginning
                   - Filter the messages based on search criteria
 * View consumer groups — per-partition  offsets, per-partition lag
+* Supports Secured Kafka Cluster
 
 # Requirements
 * Java 7 or newer
