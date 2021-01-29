@@ -29,5 +29,3 @@ You can directly download the contents (zip files) in the deploy folder and foll
 
 # Contributing Guidelines
 All contributions are more than welcomed. Contributions may close an issue, fix a bug (reported or not reported), add new design blocks, improve the existing code, add new feature, and so on. In the interest of fostering an open and welcoming environment, we as contributors and maintainers pledge to making participation in our project and our community a harassment-free experience for everyone.
-
-### A special thanks to Kafdrop for inspiring me to do this application.
