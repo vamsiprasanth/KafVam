@@ -1,14 +1,15 @@
 package kafvam.rcp;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+import org.apache.kafka.clients.CommonClientConfigs;
 import org.apache.kafka.clients.admin.AdminClient;
 import org.apache.kafka.clients.admin.ListTopicsOptions;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
+import org.apache.kafka.common.config.SslConfigs;
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -57,43 +58,53 @@ public class ApplicationWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor {
 		RCPManager.getInstance().init();
 
 		BasicConfigurator.configure();
-		String log4jFromBundlePath = Platform.getInstallLocation().getURL().getPath() + "log4j.properties";
-		String log4jConfPath = "C:/tmp" + "/log4j.properties";
-		if (new File(log4jFromBundlePath).isFile()) {
-			PropertyConfigurator.configure(log4jFromBundlePath);
-			logger.info("Log4j file loaded from path:" + log4jFromBundlePath);
-		} else {
-			PropertyConfigurator.configure(log4jConfPath);
-			logger.info("Log4j file loaded from path:" + log4jConfPath);
-
+		String log4jConfPath = System.getProperty("log4jPath");
+		if (log4jConfPath == null) {
+			logger.info("Log4j file from Bundle Path");
+			log4jConfPath = Platform.getInstallLocation().getURL().getPath() + "log4j.properties";
 		}
-		String propFilePath = Platform.getInstallLocation().getURL().getPath() + "kafvam.properties";
+		PropertyConfigurator.configure(log4jConfPath);
+		logger.info("Log4j file loaded from path:" + log4jConfPath);
+		String propFilePath = System.getProperty("propPath");
+		if (propFilePath == null) {
+			logger.info("Prop file from Bundle Path");
+			propFilePath = Platform.getInstallLocation().getURL().getPath() + "kafvam.properties";
+		}
 		logger.info("Property File Path :" + propFilePath);
 		String brokerURLFromProps = "";
 		String topicPattern = "";
-		if (new File(propFilePath).isFile()) {
-			try (InputStream input = new FileInputStream(propFilePath)) {
-				logger.info("Loaded properties");
-				Properties props = new Properties();
-				props.load(input);
-				brokerURLFromProps = props.getProperty("brokerurl");
-				topicPattern = props.getProperty("topicpattern");
-			} catch (IOException e) {
-				logger.error("Unable to load from Property file");
-			}
+		boolean isSSL = false;
+		String trustLocation = "";
+		String trustPasswd = "";
+		try (InputStream input = new FileInputStream(propFilePath)) {
+			logger.info("Loaded properties");
+			Properties props = new Properties();
+			props.load(input);
+			brokerURLFromProps = props.getProperty("brokerurl");
+			topicPattern = props.getProperty("topicpattern");
+			isSSL = Boolean.valueOf(props.getProperty("isssl"));
+			trustLocation = props.getProperty("trustlocation");
+			trustPasswd = props.getProperty("trustpasswd");
+
+		} catch (IOException e) {
+			logger.error("Unable to load from Property file", e);
 		}
+
 		logger.info("BrokerUrlfromProps:" + brokerURLFromProps + ", topicPattern:" + topicPattern);
 
-		DialogInput dialog = new DialogInput(getScreenCentredShell(), brokerURLFromProps, topicPattern);
+		DialogInput dialog = new DialogInput(getScreenCentredShell(), brokerURLFromProps, topicPattern, isSSL,
+				trustLocation, trustPasswd);
 		int returnCode = dialog.open();
 		logger.info("DialogInput returnVal:" + returnCode);
 		if (returnCode == 1)
 			System.exit(0);
 
-		KafkaInit.init(dialog.getBrokerUrl(), dialog.getTopicPattern());
+		KafkaInit.init(dialog.getBrokerUrl(), dialog.getTopicPattern(), dialog.isSSL(), dialog.getTrustLocation(),
+				dialog.getTrustPasswd());
 		checkBrokerUrlValid(KafkaInit.getBrokerUrl());
 		logger.info(
 				"Values from Dialog,BrokerUrl:" + dialog.getBrokerUrl() + ", topicPattern:" + dialog.getTopicPattern());
+		logger.info("Values from Dialog,SSLEnabled:" + dialog.isSSL() + ", trustLocation:" + dialog.getTrustLocation());
 
 		rcpConsoleLogger = new RCPConsoleLogger();
 		rcpConsoleLogger.init();
@@ -102,6 +113,7 @@ public class ApplicationWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor {
 	}
 
 	private void checkBrokerUrlValid(String brokerUrl) {
+		logger.info("Check Broker URL");
 		AdminClient adminClient = null;
 		try {
 			final Properties props = new Properties();
@@ -110,6 +122,11 @@ public class ApplicationWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor {
 			props.put("retries", 3);
 			props.put("request.timeout.ms", 5000);
 			props.put("default.api.timeout.ms", 5000);
+			if(KafkaInit.isSSL()) {
+				props.put(CommonClientConfigs.SECURITY_PROTOCOL_CONFIG, "SSL");
+				props.put(SslConfigs.SSL_TRUSTSTORE_LOCATION_CONFIG, KafkaInit.getTrustLocation());
+				props.put(SslConfigs.SSL_TRUSTSTORE_PASSWORD_CONFIG, KafkaInit.getTrustPasswd());
+			}
 			adminClient = AdminClient.create(props);
 			adminClient.listTopics(new ListTopicsOptions().timeoutMs(5000)).listings().get();
 		} catch (Exception e) {

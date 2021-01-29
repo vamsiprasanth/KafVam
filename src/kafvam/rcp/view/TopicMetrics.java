@@ -5,6 +5,7 @@ import org.apache.log4j.Logger;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.swt.custom.CTabItem;
+import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
@@ -29,6 +30,7 @@ public class TopicMetrics extends ViewPart {
 		toolkit = new FormToolkit(parent.getDisplay());
 
 		tabFolder = new CTabFolder(parent, SWT.BORDER);
+		tabFolder.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		tabFolder.setSimple(false);
 		tabFolder.setSelectionBackground(
 				Display.getCurrent().getSystemColor(SWT.COLOR_TITLE_INACTIVE_BACKGROUND_GRADIENT));
@@ -49,11 +51,12 @@ public class TopicMetrics extends ViewPart {
 		cgMetricsTabItem.setImage(Activator.getImageDescriptor("icons/kafka.png").createImage());
 		GridLayout gridLayout = new GridLayout(1, true);
 		cgMetricsComposite.setLayout(gridLayout);
+		cgMetricsComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+
 		logger.info("Topic Metrics View created!");
 		tpMetricsHndlr = new HandlerTopicMetrics(this, toolkit);
 		tpMetricsHndlr.initCG(cgMetricsComposite);
 		tabFolder.setSelection(0);
-
 	}
 
 	@Override

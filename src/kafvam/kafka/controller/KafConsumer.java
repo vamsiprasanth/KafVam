@@ -11,6 +11,7 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
+import org.apache.kafka.clients.CommonClientConfigs;
 import org.apache.kafka.clients.consumer.Consumer;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRebalanceListener;
@@ -20,6 +21,7 @@ import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.common.Node;
 import org.apache.kafka.common.PartitionInfo;
 import org.apache.kafka.common.TopicPartition;
+import org.apache.kafka.common.config.SslConfigs;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -35,11 +37,11 @@ public class KafConsumer {
 	private static final int MAX_POLL = 3;
 	private Consumer<String, String> pollKafConsumer;
 	private KafConsumerRunner kafkaConsumerRunner;
-
 	private Consumer<String, String> partitionConsumer;
 
 	public List<String> viewMsgs(String bootstrapServer, String topic, List<String> searchMsgs, boolean fromBeginning,
 			int partition, long offset, long numOfMsgs, long latestOffset) {
+		logger.info("view Messages");
 		List<String> msgs = new ArrayList<>();
 		int emptyPolls = 0;
 		try {
@@ -103,6 +105,7 @@ public class KafConsumer {
 
 	public void pollMsgs(String bootstrapServer, String topic, List<String> searchMsgs, boolean fromBeginning) {
 		try {
+			logger.info("poll Messages");
 			pollKafConsumer = createConsumer(KafkaInit.getBrokerUrl(), "kafvampollmsg", fromBeginning);
 			kafkaConsumerRunner = new KafConsumerRunner(pollKafConsumer, searchMsgs, topic, fromBeginning);
 			Thread thread = new Thread(kafkaConsumerRunner);
@@ -139,6 +142,11 @@ public class KafConsumer {
 			props.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, false);
 			props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
 			props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
+			if(KafkaInit.isSSL()) {
+				props.put(CommonClientConfigs.SECURITY_PROTOCOL_CONFIG, "SSL");
+				props.put(SslConfigs.SSL_TRUSTSTORE_LOCATION_CONFIG, KafkaInit.getTrustLocation());
+				props.put(SslConfigs.SSL_TRUSTSTORE_PASSWORD_CONFIG, KafkaInit.getTrustPasswd());
+			}
 			consumer = new KafkaConsumer<>(props);
 		} catch (Exception e) {
 			logger.error("Consumer creation failed!", e);
@@ -165,6 +173,11 @@ public class KafConsumer {
 			props.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, false);
 			props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
 			props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
+			if(KafkaInit.isSSL()) {
+				props.put(CommonClientConfigs.SECURITY_PROTOCOL_CONFIG, "SSL");
+				props.put(SslConfigs.SSL_TRUSTSTORE_LOCATION_CONFIG, KafkaInit.getTrustLocation());
+				props.put(SslConfigs.SSL_TRUSTSTORE_PASSWORD_CONFIG, KafkaInit.getTrustPasswd());
+			}
 			partitionConsumer = new KafkaConsumer<>(props);
 		} catch (Exception e) {
 			logger.error("Consumer creation failed!", e);

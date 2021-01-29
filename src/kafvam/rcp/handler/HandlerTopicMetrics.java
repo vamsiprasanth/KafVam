@@ -135,26 +135,27 @@ public class HandlerTopicMetrics {
 			}
 		}
 		if (!type.equals(CGMETRICS)) {
-			topicMetricsViewer = new TableViewer(composite, SWT.SINGLE | SWT.H_SCROLL | SWT.V_SCROLL | SWT.BORDER);
+			topicMetricsViewer = new TableViewer(composite, SWT.RESIZE | SWT.H_SCROLL | SWT.V_SCROLL | SWT.BORDER);
 			viewer = topicMetricsViewer;
 		} else {
-			cgMetricsViewer = new TableViewer(composite, SWT.SINGLE | SWT.H_SCROLL | SWT.V_SCROLL | SWT.BORDER);
+			cgMetricsViewer = new TableViewer(composite, SWT.RESIZE | SWT.H_SCROLL | SWT.V_SCROLL | SWT.BORDER);
 			viewer = cgMetricsViewer;
 		}
 		viewer.setContentProvider(new ArrayContentProvider());
-		if (type.equals(CGMETRICS))
+		if (type.equals(CGMETRICS)) {
 			viewer.setInput(cgDetails);
-		else {
+		} else {
 			viewer.setInput(tpMap.values().stream().collect(Collectors.toList()));
+			viewer.setComparator(new ViewerComparator());
 		}
-		viewer.setComparator(new ViewerComparator());
 		Table table = viewer.getTable();
 		table.setBackground(WidgetFactory.LIGHT_VIOLET_COLOR);
 		table.setHeaderVisible(true);
 		table.setLinesVisible(true);
-		table.setLayoutData(new GridData(GridData.FILL_BOTH));
-		if (type.equals(CGMETRICS))
-			table.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 2, 1));
+		table.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+		// if (type.equals(CGMETRICS))
+		// table.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 2,
+		// 1));
 
 		for (int i = 0; i < titles.length; i++) {
 			final String title = titles[i];
@@ -175,6 +176,7 @@ public class HandlerTopicMetrics {
 
 		}
 		viewer.refresh();
+
 		if (type.equals(CGMETRICS))
 			setParentLayout(tpMetricsView.getCgMetricsComposite());
 		setParentLayout(composite);
@@ -198,9 +200,10 @@ public class HandlerTopicMetrics {
 	private Composite createSectionComposite(Composite composite, String val, int cols) {
 		Section section = WidgetFactory.createTitleOnlySection(toolkit, composite);
 		section.setText(val);
-		section.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
+		section.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		Composite secComposite = WidgetFactory.createComposite(toolkit, section);
 		secComposite.setLayout(new GridLayout(cols, false));
+		secComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		section.setClient(secComposite);
 		return secComposite;
 	}

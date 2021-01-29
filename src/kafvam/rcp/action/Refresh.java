@@ -24,7 +24,7 @@ public class Refresh extends Action implements IWorkbenchAction {
 	@Override
 	public void run() {
 		logger.info("Refresh Called!");
-		viewer.setInput(kac.getAllTopics());
+		viewer.setInput(kac.getAllTopics(true));
 		viewer.refresh();
 	}
 

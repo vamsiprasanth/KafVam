@@ -3,6 +3,7 @@ package kafvam.kafka.controller;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +14,7 @@ import java.util.Set;
 import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
 
+import org.apache.kafka.clients.CommonClientConfigs;
 import org.apache.kafka.clients.admin.AdminClient;
 import org.apache.kafka.clients.admin.ListConsumerGroupsResult;
 import org.apache.kafka.clients.admin.ListTopicsResult;
@@ -23,6 +25,7 @@ import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.clients.consumer.OffsetAndMetadata;
 import org.apache.kafka.common.TopicPartition;
 import org.apache.kafka.common.TopicPartitionInfo;
+import org.apache.kafka.common.config.SslConfigs;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -38,7 +41,7 @@ import kafvam.kafka.KafkaInit;
 import kafvam.kafka.entity.CGDetails;
 import kafvam.kafka.entity.KafkaDetails;
 import kafvam.kafka.entity.KafkaTopic;
-import kafvam.rcp.common.CustomProgressMonitorDialog;
+import kafvam.rcp.dialog.CustomProgressMonitorDialog;
 
 public class KafAdminClient {
 	private Logger logger = LogManager.getLogger(getClass());
@@ -47,13 +50,19 @@ public class KafAdminClient {
 	private List<KafkaTopic> kafkaTopicDetails;
 
 	public KafkaDetails getKafkaDetails() {
+		logger.info("getKafkaDetails");
+
 		long sTime = System.currentTimeMillis();
 		long eTime;
 		KafkaDetails details = null;
 		final Properties props = new Properties();
 		props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, KafkaInit.getBrokerUrl());
 		props.put(ConsumerConfig.CLIENT_ID_CONFIG, "kafdrop-admin-details");
-
+		if (KafkaInit.isSSL()) {
+			props.put(CommonClientConfigs.SECURITY_PROTOCOL_CONFIG, "SSL");
+			props.put(SslConfigs.SSL_TRUSTSTORE_LOCATION_CONFIG, KafkaInit.getTrustLocation());
+			props.put(SslConfigs.SSL_TRUSTSTORE_PASSWORD_CONFIG, KafkaInit.getTrustPasswd());
+		}
 		AdminClient adminClient = AdminClient.create(props);
 
 		try {
@@ -89,10 +98,16 @@ public class KafAdminClient {
 		return details;
 	}
 
-	public List<KafkaTopic> getAllTopics() {
-		final Properties props = new Properties();
+	public List<KafkaTopic> getAllTopics(boolean refresh) {
+		logger.info("getAllTopics");
+		Properties props = new Properties();
 		props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, KafkaInit.getBrokerUrl());
 		props.put(ConsumerConfig.CLIENT_ID_CONFIG, "kafdrop-admin-topics");
+		if (KafkaInit.isSSL()) {
+			props.put(CommonClientConfigs.SECURITY_PROTOCOL_CONFIG, "SSL");
+			props.put(SslConfigs.SSL_TRUSTSTORE_LOCATION_CONFIG, KafkaInit.getTrustLocation());
+			props.put(SslConfigs.SSL_TRUSTSTORE_PASSWORD_CONFIG, KafkaInit.getTrustPasswd());
+		}
 		AdminClient adminClient = AdminClient.create(props);
 		ListTopicsResult rs = adminClient.listTopics();
 		adminClient.close();
@@ -111,7 +126,7 @@ public class KafAdminClient {
 				}
 			} else
 				matchedTopics = topics;
-			kafkaTopicDetails = addProgressBar(matchedTopics);
+			kafkaTopicDetails = addProgressBar(matchedTopics, refresh);
 			return kafkaTopicDetails;
 		} catch (Exception e) {
 			logger.error(e);
@@ -139,6 +154,11 @@ public class KafAdminClient {
 			final Properties props = new Properties();
 			props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, KafkaInit.getBrokerUrl());
 			props.put(ConsumerConfig.CLIENT_ID_CONFIG, "kafdrop-admin-gpinfo");
+			if (KafkaInit.isSSL()) {
+				props.put(CommonClientConfigs.SECURITY_PROTOCOL_CONFIG, "SSL");
+				props.put(SslConfigs.SSL_TRUSTSTORE_LOCATION_CONFIG, KafkaInit.getTrustLocation());
+				props.put(SslConfigs.SSL_TRUSTSTORE_PASSWORD_CONFIG, KafkaInit.getTrustPasswd());
+			}
 			AdminClient adminClient = AdminClient.create(props);
 			try {
 				long sTime = System.currentTimeMillis();
@@ -163,6 +183,11 @@ public class KafAdminClient {
 		final Properties props = new Properties();
 		props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, KafkaInit.getBrokerUrl());
 		props.put(ConsumerConfig.CLIENT_ID_CONFIG, "kafdrop-admin-gpinfo");
+		if (KafkaInit.isSSL()) {
+			props.put(CommonClientConfigs.SECURITY_PROTOCOL_CONFIG, "SSL");
+			props.put(SslConfigs.SSL_TRUSTSTORE_LOCATION_CONFIG, KafkaInit.getTrustLocation());
+			props.put(SslConfigs.SSL_TRUSTSTORE_PASSWORD_CONFIG, KafkaInit.getTrustPasswd());
+		}
 		long sTime = System.currentTimeMillis();
 		long eTime;
 		AdminClient adminClient = AdminClient.create(props);
@@ -206,6 +231,11 @@ public class KafAdminClient {
 		final Properties props = new Properties();
 		props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, KafkaInit.getBrokerUrl());
 		props.put(ConsumerConfig.CLIENT_ID_CONFIG, "kafdrop-admin-gpinfo");
+		if (KafkaInit.isSSL()) {
+			props.put(CommonClientConfigs.SECURITY_PROTOCOL_CONFIG, "SSL");
+			props.put(SslConfigs.SSL_TRUSTSTORE_LOCATION_CONFIG, KafkaInit.getTrustLocation());
+			props.put(SslConfigs.SSL_TRUSTSTORE_PASSWORD_CONFIG, KafkaInit.getTrustPasswd());
+		}
 		long sTime = System.currentTimeMillis();
 		long eTime;
 		AdminClient adminClient = AdminClient.create(props);
@@ -232,6 +262,9 @@ public class KafAdminClient {
 
 			logger.info("Consumer Group Count for topic:" + topic + "is " + cgDetails.size());
 			adminClient.close();
+			if (cgDetails != null)
+				cgDetails.sort(Comparator.comparing(CGDetails::getGpId).thenComparing(CGDetails::getPartitionId));
+
 			return cgDetails;
 		} catch (Exception e) {
 			logger.error(e);
@@ -253,18 +286,19 @@ public class KafAdminClient {
 		props.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, false);
 		props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
 		props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
-
+		if (KafkaInit.isSSL()) {
+			props.put(CommonClientConfigs.SECURITY_PROTOCOL_CONFIG, "SSL");
+			props.put(SslConfigs.SSL_TRUSTSTORE_LOCATION_CONFIG, KafkaInit.getTrustLocation());
+			props.put(SslConfigs.SSL_TRUSTSTORE_PASSWORD_CONFIG, KafkaInit.getTrustPasswd());
+		}
 		final Consumer<String, String> consumer = new KafkaConsumer<>(props);
 		return consumer;
 	}
 
-	public List<KafkaTopic> addProgressBar(Set<String> topics) {
+	public List<KafkaTopic> addProgressBar(Set<String> topics, boolean refresh) {
+		logger.info("add Progress Bar");
+
 		List<KafkaTopic> kafTopicList = new ArrayList<>();
-		// Executor executor = Executors.newSingleThreadExecutor();
-		// executor.execute(() -> {
-		// populateGpIds();
-		// logger.info("GpId Populate Completed!!");
-		// });
 
 		Shell shell = getScreenCentredShell();
 		CustomProgressMonitorDialog dialog = new CustomProgressMonitorDialog(shell, "Broker Info Loading Progress");
@@ -288,7 +322,10 @@ public class KafAdminClient {
 						if (monitor.isCanceled()) {
 							logger.info("Cancelled triggered from Progress Dialog, Application exiting...");
 							monitor.done();
-							System.exit(0);
+							if (!refresh)
+								System.exit(0);
+							else
+								break;
 						}
 					}
 					monitor.done();

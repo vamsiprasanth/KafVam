@@ -66,8 +66,9 @@ public class BrokerDetails extends ViewPart {
 			WidgetFactory.createLabel(toolkit, composite, "").setVisible(false);
 			hs.executeCommand(HandlerBrokerDetails.ID, null);
 		} catch (Exception e) {
-			MessageDialog.openError(getSite().getShell(), "Error", "Error opening job.");
+			MessageDialog.openError(getSite().getShell(), "Error", e.getMessage());
 			logger.error(e);
+			System.exit(1);
 		}
 		composite.layout();
 	}

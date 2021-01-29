@@ -49,7 +49,6 @@ public class Topic extends ViewPart {
 		lCustomAction.setImageDescriptor(Activator.getImageDescriptor("icons/refresh.gif"));
 		lCustomAction.setToolTipText("Refresh Topic List");
 		getViewSite().getActionBars().getToolBarManager().add(lCustomAction);
-
 		addListener(viewer);
 	}
 

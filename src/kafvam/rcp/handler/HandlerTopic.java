@@ -34,7 +34,7 @@ public class HandlerTopic {
 		logger.info("Handler Topic Initialize");
 		TableViewer viewer = tpView.getViewer();
 		viewer.setContentProvider(new ArrayContentProvider());
-		viewer.setInput(kac.getAllTopics());
+		viewer.setInput(kac.getAllTopics(false));
 		viewer.setComparator(new ViewerComparator());
 		logger.info("Handler Topic Initialize Complete");
 

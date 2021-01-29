@@ -49,12 +49,24 @@ public class WidgetFactory {
 		return toolkit.createComposite(composite, SWT.NONE);
 	}
 
+	public static Text createToolKitText(FormToolkit toolkit, Composite composite, String val) {
+		return toolkit.createText(composite, val, SWT.SINGLE);
+	}
+
+	public static Text createToolKitPasswd(FormToolkit toolkit, Composite composite, String val) {
+		return toolkit.createText(composite, val, SWT.PASSWORD);
+	}
+
 	public static Label createLabel(FormToolkit toolkit, Composite composite, String text) {
 		return toolkit.createLabel(composite, text);
 	}
 
 	public static Label createWrapLabel(FormToolkit toolkit, Composite composite, String text) {
-		return toolkit.createLabel(composite, text,SWT.WRAP);
+		return toolkit.createLabel(composite, text, SWT.WRAP);
+	}
+
+	public static Button createCheck(FormToolkit toolkit, Composite composite, String val) {
+		return toolkit.createButton(composite, val, SWT.CHECK);
 	}
 
 	public static Label createLabel(Composite composite) {

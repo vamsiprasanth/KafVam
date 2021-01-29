@@ -11,7 +11,7 @@ import org.eclipse.ui.IViewReference;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 
-import kafvam.rcp.common.CustomProgressMonitorDialog;
+import kafvam.rcp.dialog.CustomProgressMonitorDialog;
 
 public class ShutdownHook extends Thread {
 	private Logger logger = LogManager.getLogger(getClass());
