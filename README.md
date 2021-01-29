@@ -22,7 +22,7 @@ This project is designed using eclipse RCP3. It's a desktop application that can
 * Windows 7 or later
 
 # Getting Started
-The project was developed in Eclipse Neon. Download Eclipse RCP3 development tools and import the project and you are good to go.
+The project was developed in Eclipse Neon. Download Eclipse RCP3 development tools and import the project and run <b>KafVam.product.launch</b>. Kindly provide the <b>log4jPath</b> and <b>propPath</b> in VM arguments. The sample files log4j.properties and KafVam.properties are checked in the code.
 
 # Running the Product in Windows
 You can directly download the contents (zip files) in the deploy folder and follow the ReadMe.txt in deploy folder to run the product/executable.
