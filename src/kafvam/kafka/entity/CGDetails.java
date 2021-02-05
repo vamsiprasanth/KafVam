@@ -1,5 +1,9 @@
 package kafvam.kafka.entity;
 
+/**
+ * @author Vamsi Prasanth
+ *
+ */
 public class CGDetails {
 	private long partitionId;
 	private long curOffset;

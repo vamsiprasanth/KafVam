@@ -42,6 +42,10 @@ import kafvam.kafka.entity.KafkaTopicPartition;
 import kafvam.rcp.common.WidgetFactory;
 import kafvam.rcp.view.TopicMetrics;
 
+/**
+ * @author Vamsi Prasanth
+ *
+ */
 public class HandlerTopicMetrics {
 	private Logger logger = LogManager.getLogger(getClass());
 

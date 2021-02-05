@@ -6,6 +6,10 @@ import org.eclipse.swt.widgets.Shell;
 
 import kafvam.rcp.Activator;
 
+/**
+ * @author Vamsi Prasanth
+ *
+ */
 public class CustomProgressMonitorDialog extends ProgressMonitorDialog {
 
 	private String title;

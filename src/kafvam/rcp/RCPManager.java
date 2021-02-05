@@ -3,6 +3,10 @@ package kafvam.rcp;
 import kafvam.rcp.events.UiChangedEventCaster;
 import kafvam.rcp.events.UiChangedListener;
 
+/**
+ * @author Vamsi Prasanth
+ *
+ */
 public class RCPManager {
 	private static RCPManager rcpManager = new RCPManager();
 	private UiChangedEventCaster uiChangedEventCaster;

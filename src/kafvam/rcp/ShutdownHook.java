@@ -13,6 +13,10 @@ import org.eclipse.ui.PlatformUI;
 
 import kafvam.rcp.dialog.CustomProgressMonitorDialog;
 
+/**
+ * @author Vamsi Prasanth
+ *
+ */
 public class ShutdownHook extends Thread {
 	private Logger logger = LogManager.getLogger(getClass());
 

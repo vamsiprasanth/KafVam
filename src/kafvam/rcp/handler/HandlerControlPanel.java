@@ -23,6 +23,10 @@ import kafvam.rcp.events.UiChangedEvent;
 import kafvam.rcp.view.ControlPanel;
 import kafvam.rcp.view.TopicMessages;
 
+/**
+ * @author Vamsi Prasanth
+ *
+ */
 public class HandlerControlPanel {
 	private Logger logger = LogManager.getLogger(getClass());
 	private KafConsumer kafConsumer = new KafConsumer();

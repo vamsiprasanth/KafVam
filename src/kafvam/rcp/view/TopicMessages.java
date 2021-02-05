@@ -27,6 +27,10 @@ import kafvam.rcp.events.UiChangedEvent.EVENT_TYPE;
 import kafvam.rcp.handler.HandlerPollMessages;
 import kafvam.rcp.handler.HandlerViewMessages;
 
+/**
+ * @author Vamsi Prasanth
+ *
+ */
 public class TopicMessages extends ViewPart {
 	private Logger logger = LogManager.getLogger(getClass());
 	public static final String ID = "KafVam.topicmessages";

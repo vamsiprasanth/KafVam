@@ -13,7 +13,10 @@ import kafvam.rcp.view.ControlPanel;
 import kafvam.rcp.view.Topic;
 import kafvam.rcp.view.TopicMessages;
 import kafvam.rcp.view.TopicMetrics;
-
+/**
+ * @author Vamsi Prasanth
+ *
+ */
 public class KafVam implements IPerspectiveFactory {
 
 	@Override

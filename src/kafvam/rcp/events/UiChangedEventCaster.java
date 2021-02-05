@@ -3,6 +3,10 @@ package kafvam.rcp.events;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+/**
+ * @author Vamsi Prasanth
+ *
+ */
 public class UiChangedEventCaster
 {
 	private List<UiChangedListener> listeners = new CopyOnWriteArrayList<UiChangedListener>();

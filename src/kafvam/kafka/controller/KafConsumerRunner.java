@@ -20,6 +20,10 @@ import kafvam.rcp.RCPManager;
 import kafvam.rcp.events.AddLogEventImpl;
 import kafvam.rcp.events.UiChangedEvent;
 
+/**
+ * @author Vamsi Prasanth
+ *
+ */
 public class KafConsumerRunner implements Runnable {
 	private Logger logger = LogManager.getLogger(getClass());
 

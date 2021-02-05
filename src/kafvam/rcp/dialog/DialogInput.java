@@ -14,6 +14,10 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
 import kafvam.rcp.Activator;
 import kafvam.rcp.common.WidgetFactory;
 
+/**
+ * @author Vamsi Prasanth
+ *
+ */
 public class DialogInput extends Dialog {
 
 	private static final String DEFAULT_BROKER_URL = "localhost:9092";

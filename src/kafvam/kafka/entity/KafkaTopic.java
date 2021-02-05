@@ -3,6 +3,10 @@ package kafvam.kafka.entity;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * @author Vamsi Prasanth
+ *
+ */
 public class KafkaTopic {
 	private final String name;
 	private ConcurrentHashMap<Integer, KafkaTopicPartition> partitions = new ConcurrentHashMap<>();

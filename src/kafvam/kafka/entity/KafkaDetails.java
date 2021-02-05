@@ -1,5 +1,9 @@
 package kafvam.kafka.entity;
 
+/**
+ * @author Vamsi Prasanth
+ *
+ */
 public class KafkaDetails {
 	private String bootstrapServer;
 	private int totalTopics;

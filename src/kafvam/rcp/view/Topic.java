@@ -22,6 +22,10 @@ import kafvam.rcp.common.WidgetFactory;
 import kafvam.rcp.handler.HanderTopicViewer;
 import kafvam.rcp.handler.HandlerTopic;
 
+/**
+ * @author Vamsi Prasanth
+ *
+ */
 public class Topic extends ViewPart {
 	private Logger logger = LogManager.getLogger(getClass());
 	public static final String ID = "KafVam.topic";

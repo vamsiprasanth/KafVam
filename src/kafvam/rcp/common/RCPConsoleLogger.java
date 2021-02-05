@@ -14,6 +14,10 @@ import kafvam.rcp.events.AddLogEventImpl;
 import kafvam.rcp.events.UiChangedEvent;
 import kafvam.rcp.events.UiChangedListener;
 
+/**
+ * @author Vamsi Prasanth
+ *
+ */
 public class RCPConsoleLogger implements UiChangedListener {
 	private Logger logger = LogManager.getLogger(getClass());
 	private static final int CLEAR_CONSOLE_LIMIT = 30000;

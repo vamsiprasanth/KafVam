@@ -9,6 +9,10 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * @author Vamsi Prasanth
+ *
+ */
 public class KafkaTopicPartition {
 	private final int id;
 	private final Map<Integer, PartitionReplica> replicas = new LinkedHashMap<>();

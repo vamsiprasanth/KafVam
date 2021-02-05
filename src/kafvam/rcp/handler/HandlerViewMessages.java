@@ -33,6 +33,10 @@ import kafvam.kafka.entity.KafkaTopicPartition;
 import kafvam.rcp.common.WidgetFactory;
 import kafvam.rcp.view.TopicMessages;
 
+/**
+ * @author Vamsi Prasanth
+ *
+ */
 public class HandlerViewMessages {
 	private Logger logger = LogManager.getLogger(getClass());
 

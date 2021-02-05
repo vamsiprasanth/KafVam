@@ -22,6 +22,10 @@ import org.eclipse.ui.forms.widgets.Section;
  * @author Andy
  * 
  */
+/**
+ * @author Vamsi Prasanth
+ *
+ */
 public class WidgetFactory {
 	public static final Color WHITE_COLOR = Display.getDefault().getSystemColor(SWT.COLOR_WHITE);
 	public static final Font TAHOMA_FONT = new Font(Display.getDefault(), "Tahoma", 10, SWT.NORMAL);

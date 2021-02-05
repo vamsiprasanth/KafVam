@@ -31,6 +31,10 @@ import kafvam.kafka.entity.KafkaTopic;
 import kafvam.kafka.entity.KafkaTopicPartition;
 import kafvam.kafka.exception.KafkaException;
 
+/**
+ * @author Vamsi Prasanth
+ *
+ */
 public class KafConsumer {
 	private Logger logger = LogManager.getLogger(getClass());
 

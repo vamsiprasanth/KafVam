@@ -17,6 +17,10 @@ import kafvam.kafka.entity.KafkaTopic;
 import kafvam.kafka.entity.KafkaTopicPartition;
 import kafvam.rcp.view.Topic;
 
+/**
+ * @author Vamsi Prasanth
+ *
+ */
 public class HanderTopicViewer extends AbstractHandler {
 	public final static String ID = "hd.tp.viewer";
 

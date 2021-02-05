@@ -21,6 +21,10 @@ import kafvam.kafka.controller.KafAdminClient;
 import kafvam.kafka.entity.KafkaTopic;
 import kafvam.rcp.view.Topic;
 
+/**
+ * @author Vamsi Prasanth
+ *
+ */
 public class HandlerTopic {
 	private Logger logger = LogManager.getLogger(getClass());
 	private KafAdminClient kac = KafkaInit.getKafAdminClient();

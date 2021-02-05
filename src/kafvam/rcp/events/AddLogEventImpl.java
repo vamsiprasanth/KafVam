@@ -2,6 +2,10 @@ package kafvam.rcp.events;
 
 import java.util.List;
 
+/**
+ * @author Vamsi Prasanth
+ *
+ */
 public class AddLogEventImpl implements UiChangedEvent {
 
 	private List<String> msgs;

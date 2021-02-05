@@ -1,5 +1,9 @@
 package kafvam.kafka.exception;
 
+/**
+ * @author Vamsi Prasanth
+ *
+ */
 public class KafkaException extends Exception {
 	/**
 	 * 

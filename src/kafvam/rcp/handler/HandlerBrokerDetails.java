@@ -13,6 +13,10 @@ import kafvam.kafka.controller.KafAdminClient;
 import kafvam.kafka.entity.KafkaDetails;
 import kafvam.rcp.view.BrokerDetails;
 
+/**
+ * @author Vamsi Prasanth
+ *
+ */
 public class HandlerBrokerDetails extends AbstractHandler {
 	public final static String ID = "hd.brkr.details";
 	private Logger logger = LogManager.getLogger(getClass());

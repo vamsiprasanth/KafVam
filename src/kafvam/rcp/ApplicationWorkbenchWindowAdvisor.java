@@ -32,6 +32,10 @@ import kafvam.kafka.KafkaInit;
 import kafvam.rcp.common.RCPConsoleLogger;
 import kafvam.rcp.dialog.DialogInput;
 
+/**
+ * @author Vamsi Prasanth
+ *
+ */
 public class ApplicationWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor {
 
 	private Logger logger = LogManager.getLogger(getClass());

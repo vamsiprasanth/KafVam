@@ -25,6 +25,10 @@ import kafvam.rcp.events.UiChangedEvent;
 import kafvam.rcp.events.UiChangedListener;
 import kafvam.rcp.handler.HandlerControlPanel;
 
+/**
+ * @author Vamsi Prasanth
+ *
+ */
 public class ControlPanel extends ViewPart implements UiChangedListener {
 	private Logger logger = LogManager.getLogger(getClass());
 	public static final String ID = "KafVam.controlpanel";

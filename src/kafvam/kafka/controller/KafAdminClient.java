@@ -43,6 +43,10 @@ import kafvam.kafka.entity.KafkaDetails;
 import kafvam.kafka.entity.KafkaTopic;
 import kafvam.rcp.dialog.CustomProgressMonitorDialog;
 
+/**
+ * @author Vamsi Prasanth
+ *
+ */
 public class KafAdminClient {
 	private Logger logger = LogManager.getLogger(getClass());
 	private KafConsumer kafConsumer = new KafConsumer();

@@ -2,6 +2,10 @@ package kafvam.kafka;
 
 import kafvam.kafka.controller.KafAdminClient;
 
+/**
+ * @author Vamsi Prasanth
+ *
+ */
 public class KafkaInit {
 	private static String brokerUrl;
 	private static String topicPattern;

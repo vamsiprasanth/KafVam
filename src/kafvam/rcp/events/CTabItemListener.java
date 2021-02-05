@@ -1,5 +1,9 @@
 package kafvam.rcp.events;
 
+/**
+ * @author Vamsi Prasanth
+ *
+ */
 public class CTabItemListener implements UiChangedEvent {
 	public EVENT_TYPE eventType;
 

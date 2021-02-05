@@ -14,7 +14,10 @@ import org.eclipse.ui.part.ViewPart;
 
 import kafvam.rcp.Activator;
 import kafvam.rcp.handler.HandlerTopicMetrics;
-
+/**
+ * @author Vamsi Prasanth
+ *
+ */
 public class TopicMetrics extends ViewPart {
 	private Logger logger = LogManager.getLogger(getClass());
 	public static final String ID = "KafVam.topicmetrics";

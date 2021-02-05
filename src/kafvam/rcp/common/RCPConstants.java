@@ -1,5 +1,9 @@
 package kafvam.rcp.common;
 
+/**
+ * @author Vamsi Prasanth
+ *
+ */
 public interface RCPConstants {
 	public static final int MSG_LIMIT = 1000;
 	public static final String KAFVAM_FONT = "Segoe UI";

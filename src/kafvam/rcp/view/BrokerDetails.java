@@ -19,6 +19,10 @@ import org.eclipse.ui.part.ViewPart;
 import kafvam.rcp.common.WidgetFactory;
 import kafvam.rcp.handler.HandlerBrokerDetails;
 
+/**
+ * @author Vamsi Prasanth
+ *
+ */
 public class BrokerDetails extends ViewPart {
 	public static final String ID = "KafVam.brokerdetails";
 	private Logger logger = LogManager.getLogger(getClass());

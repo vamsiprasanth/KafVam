@@ -1,5 +1,9 @@
 package kafvam.rcp.events;
 
+/**
+ * @author Vamsi Prasanth
+ *
+ */
 public interface UiChangedEvent
 {
 
